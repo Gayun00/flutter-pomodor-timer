@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toonflix/widgets/buttons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,13 +16,13 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Scaffold(
+        home: const Scaffold(
             body: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 80,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Column(
@@ -39,24 +40,30 @@ class MyApp extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(height: 120),
-            const Text('Total balance',
+            SizedBox(height: 120),
+            Text('Total balance',
                 style: TextStyle(color: Color.fromRGBO(11, 11, 11, 0.8))),
-            const SizedBox(height: 10),
-            const Text('\$3 24 33',
+            SizedBox(height: 10),
+            Text('\$3 24 33',
                 style: TextStyle(
                     color: Color.fromRGBO(11, 11, 11, 0.8), fontSize: 44)),
-            const SizedBox(height: 20),
-            Row(children: [
-              Container(
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(45)),
-                  child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-                      child: Text('Transfer', style: TextStyle(fontSize: 22)))),
-            ])
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Button(
+                    text: 'Transfer',
+                    bgColor: Colors.amber,
+                    textColor: Colors.black),
+              ],
+            ),
+            Row(
+              children: [
+                Button(
+                    text: 'Transfer',
+                    bgColor: Colors.amber,
+                    textColor: Colors.black),
+              ],
+            ),
           ],
         )));
   }
