@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-int timerSeconds = 3;
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -12,7 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int totalSeconds = timerSeconds;
+  static const twentyFiveMinutes = 3;
+  int totalSeconds = twentyFiveMinutes;
   bool isRunning = false;
   int totalPomodors = 0;
   late Timer timer;
@@ -21,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (totalSeconds == 0) {
       setState(() {
         totalPomodors += 1;
-        totalSeconds = timerSeconds;
+        totalSeconds = twentyFiveMinutes;
         isRunning = false;
       });
 
@@ -47,6 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  String format(int seconds) {
+    var duration = Duration(seconds: seconds);
+    return (duration.toString().split(".").first.substring(2, 7));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 flex: 1,
                 child: Container(
                     alignment: Alignment.bottomCenter,
-                    child: Text('$totalSeconds',
+                    child: Text(format(totalSeconds),
                         style: TextStyle(
                             color: Theme.of(context).cardColor,
                             fontSize: 89,
