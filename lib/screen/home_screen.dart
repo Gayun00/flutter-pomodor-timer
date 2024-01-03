@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+int timerSeconds = 3;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -10,11 +12,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int totalSeconds = 1500;
+  int totalSeconds = timerSeconds;
   bool isRunning = false;
+  int totalPomodors = 0;
   late Timer timer;
 
   void onTick(Timer timer) {
+    if (totalSeconds == 0) {
+      setState(() {
+        totalPomodors += 1;
+        totalSeconds = timerSeconds;
+        isRunning = false;
+      });
+
+      timer.cancel();
+      return;
+    }
     setState(() {
       totalSeconds = totalSeconds - 1;
     });
@@ -68,16 +81,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(50)),
-                          child: const Column(
+                          child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Pomodors',
+                                const Text('Pomodors',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 28,
                                         color: Colors.black)),
-                                Text('0',
-                                    style: TextStyle(
+                                Text('$totalPomodors',
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 58,
                                         color: Colors.black)),
